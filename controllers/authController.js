@@ -3,6 +3,10 @@
 const { createUser, findUserByUsername } = require("../models/user");
 const passport = require("passport");
 const pool = require("../models/db")
+const path = require("path")
+require("dotenv").config({
+  path: path.resolve(__dirname, "..", ".env"),
+});
 
 exports.sign_up_get = ((req,res) => {
     res.render("sign-up", {title: "Sign Up"})
@@ -80,13 +84,22 @@ exports.membership_get = (req,res) => {
 }
 
 exports.membership_post = [
-  body("secretCode").trim().equals("circle123").withMessage("Incorrect membership code"),
+  body("secretCode")
+    .trim()
+    .custom((value, { req }) => {
+      console.log("Submitted code:", value);
+      console.log("Secret from env:", process.env.SECRET);
+      if (value !== process.env.SECRET) {
+        throw new Error("Incorrect membership code");
+      }
+      return true;
+    }),
 
   async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      req.flash("error", errors.array().map(err => err.msg));
+      req.flash("error", errors.array().map((err) => err.msg));
       return res.redirect("/membership");
     }
 
@@ -99,5 +112,6 @@ exports.membership_post = [
     } catch (err) {
       next(err);
     }
-  }
+  },
 ];
+

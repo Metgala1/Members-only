@@ -10,6 +10,10 @@ router.post("/sign-up", authController.sign_up_post);
 router.get("/log-in", authController.log_in_get);
 router.post("/log-in", authController.log_in_post);
 
+
+router.get("/membership", ensureAuthenticated, authController.membership_get);
+router.post("/membership", ensureAuthenticated, authController.membership_post);
+
 router.get("/log-out", authController.log_out_get);
 
  router.get("/", (req,res) => {
