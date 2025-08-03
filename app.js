@@ -7,6 +7,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const layout = require("express-ejs-layouts");
 
+//initializing the passport functions from the config 
+const initializePassport = require("./config/passport")
+initializePassport(passport)
 
 const app = express();
 
@@ -23,6 +26,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(session({secret: process.env.SECRET || "cat", resave: false, saveUninitialized: true,}));
 
 app.use(flash());
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
