@@ -30,7 +30,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.messages = {
     error: req.flash("error") || [],
-    success: req.flash("success") || [],
+    success: req.flash("success") || [], 
   };
   next();
 });
