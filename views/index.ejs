@@ -1,1 +1,22 @@
- 
+<section class="welcome-section">
+  <h2>Welcome to The Inner Circle</h2>
+
+  <% if (!currentUser) { %>
+    <p class="intro-text">
+      To unlock our <strong>exclusive community</strong>, please
+      <a href="/sign-up" class="link">sign up</a> or
+      <a href="/log-in" class="link">log in</a>.
+    </p>
+    <p class="why-join">
+      Joining gives you access to member-only messages, secret discussions, and the chance to be part of something special.
+    </p>
+  <% } else { %>
+    <p class="intro-text">
+      Glad to have you inside, <strong><%= currentUser.first_name || currentUser.username %></strong>!
+    </p>
+    <p class="member-message">
+      Feel free to explore, create new messages, and connect with other members of the Inner Circle.
+    </p>
+  <% } %>
+</section>
+

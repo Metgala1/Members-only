@@ -1,1 +1,186 @@
- 
+:root {
+  --bg: #f8f9fa;
+  --text: #1a1a1a;
+  --primary: #0077ff;
+  --flash-error: #ff4d4f;
+  --flash-success: #4BB543;
+}
+
+[data-theme="dark"] {
+  --bg: #1e1e1e;
+  --text: #f0f0f0;
+  --primary: #1e90ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  padding-bottom: 3rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav {
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  font-size: 1.5rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#theme-toggle {
+  margin-left: 1rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* Flash messages */
+.flash {
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 90%;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: opacity 0.5s ease-out;
+}
+.flash.error {
+  background-color: var(--flash-error);
+  color: white;
+}
+.flash.success {
+  background-color: var(--flash-success);
+  color: white;
+}
+
+main {
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #eee;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+/*index css*/
+.welcome-section {
+  background: var(--header-bg);
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  color: var(--text-color);
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.welcome-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.intro-text {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.why-join {
+  font-size: 1rem;
+  color: #666;
+}
+
+.member-message {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.link:hover {
+  border-color: var(--accent);
+}
+
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    background: var(--primary);
+    position: absolute;
+    right: 0;
+    top: 3.5rem;
+    width: 200px;
+    display: none;
+    padding: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+}
+
+
