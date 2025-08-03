@@ -1,7 +1,8 @@
  const bcrypt = require("bcryptjs");
  const {body, validationResult} = require("express-validator")
 const { createUser, findUserByUsername } = require("../models/user");
-const passport = require("passport")
+const passport = require("passport");
+const pool = require("../models/db")
 
 exports.sign_up_get = ((req,res) => {
     res.render("sign-up", {title: "Sign Up"})
@@ -41,7 +42,7 @@ exports.sign_up_post = [
       const hashedPassword = await bcrypt.hash(password, 10);
       await createUser({
         username,
-         password: hashedPassword,
+        hashedPassword,
         first_name,
         last_name,
         email,
@@ -65,3 +66,38 @@ exports.log_in_post = passport.authenticate("local", {
   failureRedirect: "/log-in",
   failureFlash: true,
 });
+
+exports.log_out_get = (req, res, next) => {
+  req.logout(err => {
+    if (err) return next(err);
+    req.flash("success", "You have been logged out.");
+    res.redirect("/");
+  });
+};
+
+exports.membership_get = (req,res) => {
+    res.render("membership", {title: "Become a member"})
+}
+
+exports.membership_post = [
+  body("secretCode").trim().equals("circle123").withMessage("Incorrect membership code"),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      req.flash("error", errors.array().map(err => err.msg));
+      return res.redirect("/membership");
+    }
+
+    try {
+      const userId = req.user.id;
+      await pool.query("UPDATE users SET is_member = true WHERE id = $1", [userId]);
+
+      req.flash("success", "You are now a member!");
+      res.redirect("/");
+    } catch (err) {
+      next(err);
+    }
+  }
+];

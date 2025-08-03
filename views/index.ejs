@@ -1,5 +1,7 @@
 <section class="welcome-section">
-  <h2>Welcome to The Inner Circle</h2>
+ <h2>Welcome to The Inner Circle 
+  <%= currentUser ? currentUser.first_name : "" %>
+</h2>
 
   <% if (!currentUser) { %>
     <p class="intro-text">
