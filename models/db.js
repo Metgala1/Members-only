@@ -4,5 +4,8 @@ require("dotenv").config({
   path: path.resolve(__dirname, "..", ".env"),
 });
 module.exports = new Pool({
-    connectionString: process.env.DATABASE_PUBLIC_URL
+    connectionString: process.env.DATABASE_PUBLIC_URL,
+    ssl: {
+    rejectUnauthorized: false,
+  },
 })
