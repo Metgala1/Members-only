@@ -65,26 +65,11 @@ exports.log_in_get = (req,res) => {
     res.render("log-in", {title: "Log In"})
 }
 
-exports.log_in_post = (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      console.error("🚨 Login error:", err);
-      return next(err);
-    }
-    if (!user) {
-      req.flash("error", info.message || "Invalid credentials");
-      return res.redirect("/log-in");
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        console.error("🚨 Error during req.logIn:", err);
-        return next(err);
-      }
-      return res.redirect("/");
-    });
-  })(req, res, next);
-};
-
+exports.log_in_post = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/log-in",
+  failureFlash: true,
+});
 
 exports.log_out_get = (req, res, next) => {
   req.logout(err => {
