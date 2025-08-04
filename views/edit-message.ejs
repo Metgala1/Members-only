@@ -1,0 +1,25 @@
+<% layout("layout") %>
+
+<h2>Edit Message</h2>
+
+<form action="/message/<%= message.id %>/edit" method="POST">
+  <div>
+    <label>Title:</label>
+    <input type="text" name="title" value="<%= message.title %>" required />
+  </div>
+
+  <div>
+    <label>Content:</label>
+    <textarea name="content" required><%= message.content %></textarea>
+  </div>
+
+  <button type="submit">Update</button>
+</form>
+
+<% if (typeof errors !== "undefined") { %>
+  <ul>
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

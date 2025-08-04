@@ -1,9 +1,11 @@
  const bcrypt = require("bcryptjs");
  const {body, validationResult} = require("express-validator")
 const { createUser, findUserByUsername } = require("../models/user");
+const {createMessage, getAllMessages} = require("../models/message")
 const passport = require("passport");
 const pool = require("../models/db")
-const path = require("path")
+const path = require("path");
+const { title } = require("process");
 require("dotenv").config({
   path: path.resolve(__dirname, "..", ".env"),
 });
@@ -142,6 +144,33 @@ exports.admin_post = [
       await pool.query("UPDATE users SET is_admin = true WHERE id = $1", [userId]);
 
       req.flash("success", "You are now an admin");
+      res.redirect("/");
+    } catch (err) {
+      next(err);
+    }
+  }
+];
+
+exports.message_create_get = (req, res) => {
+  res.render("new-message", { title: "New Message" });
+};
+
+exports.message_create_post = [
+  body("title").trim().notEmpty().withMessage("Title required").escape(),
+  body("content").trim().notEmpty().withMessage("Content required").escape(),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    const { title, content } = req.body;
+
+    if (!errors.isEmpty()) {
+      req.flash("error", errors.array().map(err => err.msg));
+      return res.redirect("/new-message");
+    }
+
+    try {
+      await createMessage({ title, content, user_id: req.user.id });
+      req.flash("success", "Message posted!");
       res.redirect("/");
     } catch (err) {
       next(err);
