@@ -115,3 +115,36 @@ exports.membership_post = [
   },
 ];
 
+exports.admin_get = (req, res) => {
+  res.render("admin", { title: "Become an Admin" });
+};
+
+exports.admin_post = [
+  body("adminCode")
+    .trim()
+    .custom((value) => {
+      if (value !== process.env.ADMINCODE) {
+        throw new Error("Incorrect admin code");
+      }
+      return true;
+    })
+    .withMessage("Incorrect admin code"),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("error", errors.array().map(err => err.msg));
+      return res.redirect("/admin");
+    }
+
+    try {
+      const userId = req.user.id;
+      await pool.query("UPDATE users SET is_admin = true WHERE id = $1", [userId]);
+
+      req.flash("success", "You are now an admin");
+      res.redirect("/");
+    } catch (err) {
+      next(err);
+    }
+  }
+];

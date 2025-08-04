@@ -17,8 +17,16 @@
       Glad to have you inside, <strong><%= currentUser.first_name || currentUser.username %></strong>!
     </p>
     <p class="member-message">
-      Feel free to explore, create new messages, and connect with other <a href="/membership">members</a> of the Inner Circle.
+      Feel free to explore, create new messages, and connect with other member of the Inner Circle.
     </p>
+     <% if (!currentUser.is_member) { %>
+  <p>Become a <a href="/membership">member</a></p>
+    <% } %>
+
+      <% if (!currentUser.is_member) { %>
+   <p>Become a add <a href="/admin">admin</a></p>
+    <% } %>
+   
   <% } %>
 </section>
 
