@@ -26,23 +26,51 @@
     <% } %>
 
       <% if (!currentUser.is_admin) { %>
-   <p>Become a add <a href="/admin">admin</a> </p>
+   <p>Become an <a href="/admin">admin</a> </p>
     <% } %>
    
   <% } %>
 </section>
+ <section>
+  <% if (currentUser && currentUser.is_member) { %>
+    <p><a href="/new-message">Leave a message</a></p>
+  <% } %>
+</section>
+
 <section class="messages">
   <h3>Messages</h3>
-  <% messages.forEach(msg => { %>
+  <% messages.forEach(message => { %>
     <div class="message-card">
-      <h4><%= msg.title %></h4>
-      <p><%= msg.content %></p>
-      <% if (currentUser && currentUser.id === msg.user_id) { %>
-  <a href="/message/<%= msg.id %>/edit">Edit</a>
-<% } %>
-      <small>By <%= msg.username %> • <%= new Date(msg.created_at).toLocaleString() %></small>
+      <h4><%= message.title %></h4>
+      <p><%= message.content %></p>
+      <small>
+        By <%= message.username %>
+        <% 
+          const user = users.find(u => u.id === message.user_id);
+          if (currentUser && user && user.is_member) { 
+        %>
+          <span class="badge member">(Member)</span>
+        <% } %>
+        <% if (currentUser && user && user.is_admin) { %>
+          <span class="badge admin">(Admin)</span>
+        <% } %>
+      </small>
+      <br>
+
+      <% if (currentUser && currentUser.id === message.user_id) { %>
+        <a href="/message/<%= message.id %>/edit">Edit</a>
+      <% } %>
+
+      <% if (currentUser && (currentUser.id === message.user_id || currentUser.is_admin)) { %>
+        <form action="/message/<%= message.id %>/delete" method="POST" style="display:inline;">
+          <button type="submit" onclick="return confirm('Are you sure you want to delete this message?')">Delete</button>
+        </form>
+      <% } %>
+
+      <small>At <%= new Date(message.created_at).toLocaleString() %></small>
     </div>
   <% }) %>
 </section>
+
 
 

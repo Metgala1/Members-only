@@ -62,3 +62,29 @@ exports.edit_post = [
     }
   },
 ];
+
+exports.delete_post = async (req, res, next) => {
+  const messageId = req.params.id;
+  const currentUser = req.user;
+
+  try {
+    const result = await pool.query("SELECT * FROM messages WHERE id = $1", [messageId]);
+    const message = result.rows[0];
+
+    if (!message) {
+      req.flash("error", "Message not found.");
+      return res.redirect("/");
+    }
+
+    if (message.user_id !== currentUser.id) {
+      req.flash("error", "You are not authorized to delete this message.");
+      return res.redirect("/");
+    }
+
+    await pool.query("DELETE FROM messages WHERE id = $1", [messageId]);
+    req.flash("success", "Message deleted successfully.");
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+};
