@@ -1,28 +1,39 @@
 <h2>Create an Account</h2>
 
-<form action="/sign-up" method="POST">
-  <label for="username">Username:</label><br />
-  <input type="text" id="username" name="username" required /><br />
+<p>Join <strong>The Inner Circle</strong> and become part of a vibrant, exclusive community. Gain access to member-only content, post and interact with others, and unlock hidden features.</p>
 
-  <label for="first_name">First Name:</label><br />
-  <input type="text" id="first_name" name="first_name" required /><br />
+<section class="signup-info">
+  <h3>✨ Why Sign Up?</h3>
+  <ul>
+    <li>✅ Post and reply to messages</li>
+    <li>✅ Access exclusive member and admin features</li>
+    <li>✅ Get updates and notifications</li>
+    <li>✅ Personalize your experience</li>
+  </ul>
+</section>
 
-  <label for="last_name">Last Name:</label><br />
-  <input type="text" id="last_name" name="last_name" required /><br />
+<form action="/sign-up" method="POST" class="form-signup">
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Choose a username" required />
+  </div>
 
-  <label for="email">Email:</label><br />
-  <input type="email" id="email" name="email" required /><br />
+  <div class="form-group">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" placeholder="Your first name" required />
+  </div>
 
-  <label for="password">Password:</label><br />
-  <input type="password" id="password" name="password" required /><br />
+  <div class="form-group">
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" placeholder="Your last name" required />
+  </div>
 
-  <label for="confirmPassword">Confirm Password:</label><br />
-  <input type="password" id="confirmPassword" name="confirmPassword" required /><br />
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required />
+  </div>
 
-  <button type="submit">Sign Up</button>
-</form>
-
-<% if (messages.error?.length) { %>
-  <div class="flash error"><%= messages.error.join("<br>") %></div>
-<% } %>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" id
 

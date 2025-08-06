@@ -1,76 +1,86 @@
 <section class="welcome-section">
- <h2>Welcome to The Inner Circle 
-  <%= currentUser ? currentUser.first_name : "" %>
-</h2>
+  <h2>Welcome to The Inner Circle 
+    <%= currentUser ? currentUser.first_name : "" %>
+  </h2>
 
   <% if (!currentUser) { %>
     <p class="intro-text">
       To unlock our <strong>exclusive community</strong>, please
-      <a href="/sign-up" class="link">sign up</a> or
-      <a href="/log-in" class="link">log in</a>.
+      <a href="/sign-up" class="link signup">sign up</a> or
+      <a href="/log-in" class="link signin">log in</a>.
     </p>
     <p class="why-join">
-      Joining gives you access to member-only messages, secret discussions, and the chance to be part of something special.
+      Joining gives you access to:
     </p>
+    <ul class="benefits">
+      <li>🔒 Private messages from verified members</li>
+      <li>🧠 Deep discussions, hidden threads, and community secrets</li>
+      <li>🏆 Recognition for contributing to the community</li>
+    </ul>
   <% } else { %>
     <p class="intro-text">
-      Glad to have you inside, <strong><%= currentUser.first_name || currentUser.username %></strong> <% if (currentUser && currentUser.is_admin) { %>
-  <p>🛡️ You are an Admin!</p>
-<% } %>!
+      Glad to have you inside, <strong><%= currentUser.first_name || currentUser.username %></strong> 
+      <% if (currentUser && currentUser.is_admin) { %>
+        <span class="admin-tag">🛡️ You are an Admin!</span>
+      <% } %>!
     </p>
     <p class="member-message">
-      Feel free to explore, create new messages, and connect with other member of the Inner Circle.
+      You can now explore the community, share your voice, and help shape The Inner Circle.
     </p>
-     <% if (!currentUser.is_member) { %>
-  <p>Become a <a href="/membership">member</a></p>
+
+    <% if (!currentUser.is_member) { %>
+      <p class="call-action">🌟 Become a <a href="/membership">member</a> today to unlock all features.</p>
     <% } %>
 
-      <% if (!currentUser.is_admin) { %>
-   <p>Become an <a href="/admin">admin</a> </p>
+    <% if (!currentUser.is_admin) { %>
+      <p class="call-action">👑 Want more power? Apply to <a href="/admin">become an admin</a>.</p>
     <% } %>
-   
+
+    <div class="action-links">
+      <a href="/new-message" class="btn">✍️ Post a New Message</a>
+      <a href="/profile" class="btn">👤 View Your Profile</a>
+    </div>
   <% } %>
 </section>
- <section>
-  <% if (currentUser && currentUser.is_member) { %>
-    <p><a href="/new-message">Leave a message</a></p>
-  <% } %>
-</section>
+
+<hr />
 
 <section class="messages">
-  <h3>Messages</h3>
-  <% messages.forEach(message => { %>
-    <div class="message-card">
-      <h4><%= message.title %></h4>
-      <p><%= message.content %></p>
-      <small>
-        By <%= message.username %>
-        <% 
-          const user = users.find(u => u.id === message.user_id);
-          if (currentUser && user && user.is_member) { 
-        %>
-          <span class="badge member">(Member)</span>
+  <h3>📢 Community Messages</h3>
+
+  <% if (messages.length === 0) { %>
+    <p>No messages have been posted yet. Be the first to say something!</p>
+  <% } else { %>
+    <% messages.forEach(message => { %>
+      <div class="message-card">
+        <h4><%= message.title %></h4>
+        <p><%= message.content %></p>
+
+        <small>
+          By <%= message.username %>
+          <% 
+            const user = users.find(u => u.id === message.user_id);
+            if (currentUser && user && user.is_member) { 
+          %>
+            <span class="badge member">(Member)</span>
+          <% } %>
+          <% if (currentUser && user && user.is_admin) { %>
+            <span class="badge admin">(Admin)</span>
+          <% } %>
+        </small><br>
+
+        <% if (currentUser && currentUser.id === message.user_id) { %>
+          <a href="/message/<%= message.id %>/edit">✏️ Edit</a>
         <% } %>
-        <% if (currentUser && user && user.is_admin) { %>
-          <span class="badge admin">(Admin)</span>
+
+        <% if (currentUser && (currentUser.id === message.user_id || currentUser.is_admin)) { %>
+          <form action="/message/<%= message.id %>/delete" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this message?')">🗑️ Delete</button>
+          </form>
         <% } %>
-      </small>
-      <br>
 
-      <% if (currentUser && currentUser.id === message.user_id) { %>
-        <a href="/message/<%= message.id %>/edit">Edit</a>
-      <% } %>
-
-      <% if (currentUser && (currentUser.id === message.user_id || currentUser.is_admin)) { %>
-        <form action="/message/<%= message.id %>/delete" method="POST" style="display:inline;">
-          <button type="submit" onclick="return confirm('Are you sure you want to delete this message?')">Delete</button>
-        </form>
-      <% } %>
-
-      <small>At <%= new Date(message.created_at).toLocaleString() %></small>
-    </div>
-  <% }) %>
+        <small class="timestamp">🕒 <%= new Date(message.created_at).toLocaleString() %></small>
+      </div>
+    <% }) %>
+  <% } %>
 </section>
-
-
-

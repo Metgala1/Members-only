@@ -1,7 +1,32 @@
 <h2>Become an Admin</h2>
 
-<form action="/admin" method="POST">
-  <label for="adminCode">Enter Admin Code:</label>
-  <input type="text" name="adminCode" id="adminCode" required>
-  <button type="submit">Submit</button>
+<p>Admins have the power to manage users and moderate content. Enter the secret admin code below to request admin access.</p>
+
+<!-- Flash Messages (optional, use or remove depending on your implementation) -->
+<% if (messages && messages.error && messages.error.length > 0) { %>
+  <div class="flash error"><%= messages.error.join("<br>") %></div>
+<% } %>
+
+<% if (messages && messages.success && messages.success.length > 0) { %>
+  <div class="flash success"><%= messages.success.join("<br>") %></div>
+<% } %>
+
+<form action="/admin" method="POST" class="admin-form">
+  <div class="form-group">
+    <label for="adminCode">🔐 Admin Code</label>
+    <input type="text" name="adminCode" id="adminCode" placeholder="Enter admin code..." required>
+  </div>
+
+  <button type="submit" class="submit-btn">Request Access</button>
 </form>
+
+<hr>
+
+<h3>Why Become an Admin?</h3>
+<ul>
+  <li>✅ Edit or delete inappropriate messages</li>
+  <li>✅ Manage member privileges</li>
+  <li>✅ Access exclusive moderation tools</li>
+</ul>
+
+<p>If you don’t have an admin code, please contact the site owner or wait until it becomes available.</p>

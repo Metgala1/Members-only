@@ -1,72 +1,108 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <title>The Inner Circle</title>
-    <link rel="stylesheet" href="/styles/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <div class="logo">The Inner Circle</div>
-        <nav>
-          <ul class="nav-links">
-            <% if (currentUser) { %>
-              <li>Welcome, <%= currentUser.username %></li>
-              <li><a href="/log-out">Log out</a></li>
-            <% } else { %>
-              <li><a href="/log-in">Log in</a></li>
-              <li><a href="/sign-up">Sign up</a></li>
-            <% } %>
-          </ul>
-          <button id="theme-toggle" title="Toggle theme">🌓</button>
-          <button class="hamburger" id="hamburger">☰</button>
-        </nav>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <title>The Inner Circle</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo"><a href="/">The Inner Circle</a></div>
 
-   <% if (messages && messages.error && messages.error.length > 0) { %>
-  <div class="flash error"><%= messages.error.join("<br>") %></div>
-<% } %>
+      <!-- Search bar -->
+      <form action="/search" method="GET" class="search-bar">
+        <input type="text" name="q" placeholder="Search messages, users..." />
+        <button type="submit">🔍</button>
+      </form>
 
-<% if (messages && messages.success && messages.success.length > 0) { %>
-  <div class="flash success"><%= messages.success.join("<br>") %></div>
-<% } %>
+      <nav>
+        <ul class="nav-links">
+          <% if (currentUser) { %>
+            <li>Welcome, <%= currentUser.username %></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/log-out">Log out</a></li>
+          <% } else { %>
+            <li><a href="/log-in">Log in</a></li>
+            <li><a href="/sign-up">Sign up</a></li>
+          <% } %>
+        </ul>
+        <button id="theme-toggle" title="Toggle theme">🌓</button>
+        <button class="hamburger" id="hamburger">☰</button>
+      </nav>
+    </div>
+  </header>
 
+  <!-- Flash messages -->
+  <% if (messages && messages.error && messages.error.length > 0) { %>
+    <div class="flash error"><%= messages.error.join("<br>") %></div>
+  <% } %>
 
-    <main>
-      <%- body %>
-    </main>
+  <% if (messages && messages.success && messages.success.length > 0) { %>
+    <div class="flash success"><%= messages.success.join("<br>") %></div>
+  <% } %>
 
-    <footer>
+  <main>
+    <%- body %>
+  </main>
+
+  <!-- Back to Top button -->
+  <button id="back-to-top" title="Back to top">↑</button>
+
+  <footer>
+    <div class="footer-container">
       <p>&copy; <%= new Date().getFullYear() %> The Inner Circle. All rights reserved.</p>
-    </footer>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><img src="/icons/twitter.svg" alt="Twitter" /></a>
+        <a href="#"><img src="/icons/github.svg" alt="GitHub" /></a>
+        <a href="#"><img src="/icons/discord.svg" alt="Discord" /></a>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-      // Theme toggle
-      const toggle = document.getElementById("theme-toggle");
-      const footer = document.querySelector("footer")
-      toggle.addEventListener("click", () => {
-        const html = document.documentElement;
-        html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
-        footer.style.backgroundColor = 
-    footer.style.backgroundColor === "black" ? "#eee" : "black"
-      });
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById("theme-toggle");
+    toggle.addEventListener("click", () => {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", html.dataset.theme);
+    });
 
-      // Mobile nav toggle
-      const hamburger = document.getElementById("hamburger");
-      const navLinks = document.querySelector(".nav-links");
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-      });
+    // Mobile nav toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
 
-      // Auto-hide flash messages
-      setTimeout(() => {
-        document.querySelectorAll(".flash").forEach(el => el.style.opacity = "0");
-      }, 3000);
-    </script>
-  </body>
+    // Flash message auto-hide
+    setTimeout(() => {
+      document.querySelectorAll(".flash").forEach(el => el.style.opacity = "0");
+    }, 3000);
+
+    // Back to top button
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      backToTop.style.display = window.scrollY > 200 ? "block" : "none";
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Load theme preference
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.dataset.theme = savedTheme;
+    }
+  </script>
+</body>
 </html>
 
 

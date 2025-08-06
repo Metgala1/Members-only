@@ -1,7 +1,7 @@
  const {Router} = require("express");
  const router = Router()
  const authController = require("../controllers/authController")
- const ensureAuthenticated = require("../middleware/auth")
+ const ensureAuthenticated = require("../middleeare/auth")
  const { getAllMessages } = require("../models/message");
  const messageController = require("../controllers/messageController");
  const {getAllUsers} = require("../models/user")

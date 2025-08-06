@@ -1,7 +1,40 @@
-<h2>Become a Member</h2>
+<h2>Become a Verified Member</h2>
+<p>Unlock full access to The Inner Circle by verifying your membership.</p>
 
-<form action="/membership" method="POST">
+<section class="membership-benefits">
+  <h3>Why Become a Member?</h3>
+  <ul>
+    <li>🗝️ Access exclusive posts and discussions</li>
+    <li>💬 Post messages and interact with the community</li>
+    <li>🎖️ Earn member-only badges and recognition</li>
+  </ul>
+</section>
+
+<form action="/membership" method="POST" class="form-auth">
   <label for="secretCode">Enter Membership Code:</label>
-  <input type="text" name="secretCode" id="secretCode" required>
-  <button type="submit">Submit</button>
+  <input
+    type="text"
+    name="secretCode"
+    id="secretCode"
+    placeholder="Enter your secret code"
+    required
+  />
+
+  <button type="submit">Verify & Join</button>
 </form>
+
+<section class="membership-help">
+  <h4>Don’t have a code?</h4>
+  <p>
+    Membership codes are distributed to trusted users by admins. To request access:
+  </p>
+  <ul>
+    <li>📧 Contact an admin or moderator</li>
+    <li>💬 Introduce yourself in the general forum</li>
+    <li>🔗 Watch for announcements about open membership periods</li>
+  </ul>
+
+  <p>
+    Already an admin? <a href="/admin">Enter your admin code here</a>.
+  </p>
+</section>

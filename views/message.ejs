@@ -1,6 +1,47 @@
 <h2>Create a New Message</h2>
-<form action="/new-message" method="POST">
-  <input type="text" name="title" placeholder="Title" required>
-  <textarea name="content" placeholder="Message content..." required></textarea>
-  <button type="submit">Post</button>
+<p>Share your thoughts, announcements, or insights with the community.</p>
+
+<section class="message-guidelines">
+  <h3>📝 Message Guidelines</h3>
+  <ul>
+    <li>Keep it respectful and constructive</li>
+    <li>Use clear titles to summarize your message</li>
+    <li>Avoid posting spam or offensive content</li>
+  </ul>
+</section>
+
+<form action="/new-message" method="POST" class="form-message">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="E.g. Site Update, Quick Question, Funny Moment..."
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="content">Content:</label>
+    <textarea
+      name="content"
+      id="content"
+      rows="6"
+      placeholder="Write your message here..."
+      required
+    ></textarea>
+  </div>
+
+  <button type="submit">📢 Post Message</button>
 </form>
+
+<section class="tips-box">
+  <h4>💡 Tips for Great Posts</h4>
+  <ul>
+    <li>Use line breaks and formatting for readability</li>
+    <li>Keep it concise but meaningful</li>
+    <li>Add emojis to bring your message to life!</li>
+  </ul>
+</section>
+

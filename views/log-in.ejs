@@ -1,11 +1,20 @@
-<h2>Log In</h2>
+<h2>Welcome Back to The Inner Circle</h2>
+<p>Enter your credentials to access exclusive messages and discussions.</p>
 
-<form action="/log-in" method="POST">
+<form action="/log-in" method="POST" class="form-auth">
   <label for="username">Username:</label><br />
-  <input type="text" id="username" name="username" required /><br />
+  <input type="text" id="username" name="username" placeholder="e.g. john_doe" required /><br />
 
   <label for="password">Password:</label><br />
-  <input type="password" id="password" name="password" required /><br />
+  <input type="password" id="password" name="password" placeholder="Your secret password" required /><br />
+
+  <div class="form-options">
+    <label>
+      <input type="checkbox" name="remember" />
+      Remember me
+    </label>
+    <a href="#" class="forgot-password">Forgot Password?</a>
+  </div>
 
   <button type="submit">Log In</button>
 </form>
@@ -16,3 +25,17 @@
 <% if (messages.success?.length) { %>
   <div class="flash success"><%= messages.success.join("<br>") %></div>
 <% } %>
+
+<hr />
+
+<section class="extras">
+  <h3>New to The Inner Circle?</h3>
+  <p><a href="/sign-up">Sign up now</a> to join conversations, post messages, and unlock hidden content.</p>
+
+  <h3>Try a Demo Account</h3>
+  <p>Use the following test credentials to explore:</p>
+  <ul>
+    <li><strong>Username:</strong> demoUser</li>
+    <li><strong>Password:</strong> demoPass123</li>
+  </ul>
+</section>

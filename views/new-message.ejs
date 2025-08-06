@@ -1,6 +1,53 @@
 <h2>Create a New Message</h2>
-<form action="/new-message" method="POST">
-  <input type="text" name="title" placeholder="Title" required>
-  <textarea name="content" placeholder="Message content..." required></textarea>
-  <button type="submit">Post</button>
+
+<p>Have something to share with the community? Use the form below to post your thoughts, announcements, questions, or even start a fun discussion.</p>
+
+<section class="message-info">
+  <h3>💬 What Can You Post?</h3>
+  <ul>
+    <li>📢 Announcements</li>
+    <li>❓ Questions or polls</li>
+    <li>😄 Funny or interesting experiences</li>
+    <li>💡 Tips, tutorials, or insights</li>
+  </ul>
+</section>
+
+<form action="/new-message" method="POST" class="form-message">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Enter a clear, eye-catching title"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="content">Message Content:</label>
+    <textarea
+      name="content"
+      id="content"
+      rows="6"
+      placeholder="Write your message here..."
+      required
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <p><strong>Reminder:</strong> Be respectful and kind. Messages are public and reflect the tone of our community.</p>
+  </div>
+
+  <button type="submit">📨 Post Your Message</button>
 </form>
+
+<section class="posting-tips">
+  <h4>🛠 Tips for Better Engagement</h4>
+  <ul>
+    <li>Use formatting and spacing to improve readability</li>
+    <li>Be specific and descriptive in your title</li>
+    <li>Use emojis sparingly to add personality</li>
+    <li>Respond to others once your message is posted</li>
+  </ul>
+</section>
