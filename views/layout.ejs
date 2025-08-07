@@ -21,8 +21,8 @@
         <ul class="nav-links">
           <% if (currentUser) { %>
             <li>Welcome, <%= currentUser.username %></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/log-out">Log out</a></li>
+            <li><a class="profile" href="/profile">Profile</a></li>
+            <li><a class="log-out" href="/log-out">Log out</a></li>
           <% } else { %>
             <li><a href="/log-in">Log in</a></li>
             <li><a href="/sign-up">Sign up</a></li>
@@ -58,12 +58,6 @@
         <a href="/privacy">Privacy</a>
         <a href="/contact">Contact</a>
       </div>
-      <div class="social-icons">
-        <a href="#"><img src="/icons/twitter.svg" alt="Twitter" /></a>
-        <a href="#"><img src="/icons/github.svg" alt="GitHub" /></a>
-        <a href="#"><img src="/icons/discord.svg" alt="Discord" /></a>
-      </div>
-    </div>
   </footer>
 
   <script>
