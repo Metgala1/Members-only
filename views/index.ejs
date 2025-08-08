@@ -6,17 +6,18 @@
   <% if (!currentUser) { %>
     <p class="intro-text">
       To unlock our <strong>exclusive community</strong>, please
-      <a href="/sign-up" class="link signup">sign up</a> or
-      <a href="/log-in" class="link signin">log in</a>.
+      <a href="/sign-up" class="link signup"><i class="fas fa-user-plus"></i> sign up</a> or
+      <a href="/log-in" class="link signin"><i class="fas fa-sign-in-alt"></i> log in</a>.
     </p>
     <p class="why-join">
       Joining gives you access to:
     </p>
-    <ul class="benefits">
-      <li>🔒 Private messages from verified members</li>
-      <li>🧠 Deep discussions, hidden threads, and community secrets</li>
-      <li>🏆 Recognition for contributing to the community</li>
-    </ul>
+     <ul class="benefits">
+  <li><i class="fas fa-lock"></i> Private messages from verified members</li>
+  <li><i class="fas fa-user-secret"></i> Deep discussions, hidden threads, and community secrets</li>
+  <li><i class="fas fa-trophy"></i> Recognition for contributing to the community</li>
+</ul>
+
   <% } else { %>
     <p class="intro-text">
       Glad to have you inside, <strong><%= currentUser.first_name || currentUser.username %></strong> 
@@ -46,7 +47,7 @@
 <hr />
 
 <section class="messages">
-  <h3>📢 Community Messages</h3>
+  <h3><i class="fas fa-comments"></i>   Community Messages</h3>
 
   <% if (messages.length === 0) { %>
     <p>No messages have been posted yet. Be the first to say something!</p>
@@ -57,7 +58,7 @@
         <p><%= message.content %></p>
 
         <small>
-          By <%= message.username %>
+          <p class="username"><i class="fas fa-user"></i> By <%= message.username %></p>
           <% 
             const user = users.find(u => u.id === message.user_id);
             if (currentUser && user && user.is_member) { 
@@ -79,7 +80,7 @@
           </form>
         <% } %>
 
-        <small class="timestamp">🕒 <%= new Date(message.created_at).toLocaleString() %></small>
+        <small class="timestamp"><p class="time"><i class="fas fa-clock"></i> <%= new Date(message.created_at).toLocaleString() %></p></small>
       </div>
     <% }) %>
   <% } %>
