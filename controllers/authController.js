@@ -202,3 +202,7 @@ exports.showProfile = async (req, res) => {
     res.status(500).send("Server error");
   }*/
 };
+
+exports.search = (req,res) => {
+  res.render("comingSoon")
+}

@@ -30,6 +30,7 @@ router.get("/new-message", ensureAuthenticated, authController.message_create_ge
 router.post("/new-message", ensureAuthenticated, authController.message_create_post);
 
 router.get("/profile", ensureAuthenticated, authController.showProfile)
+router.get("/search", authController.search)
 
 
 
