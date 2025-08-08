@@ -134,6 +134,16 @@ header {
   list-style: none;
   align-items: center;
 }
+.nav-links .log-in{
+  background-color: var(--primary);
+   padding: 4px 10px;
+    border-radius: 5px;
+}
+.nav-links .sign-up{
+   padding: 4px 10px;
+    border-radius: 5px;
+    background-color: lightskyblue;
+}
 .nav-links .log-out{
     background-color: red;
     padding: 4px 10px;
@@ -373,7 +383,7 @@ footer {
 
 .welcome-section {
   text-align: center;
-  padding: 1rem;
+  padding: 2.5rem;
   background: var(--bg-secondary);
   border-radius: 12px;
   box-shadow: var(--shadow);
@@ -849,6 +859,9 @@ select {
 
   .search-bar input {
     width: 100%;
+  }
+  .welcome-section{
+    padding: 1rem;
   }
 
   .welcome-section h2 {
