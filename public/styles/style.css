@@ -388,12 +388,15 @@ li::marker {
 
 .action-links .btn {
   margin: 0.5rem;
+  text-decoration: none;
+    color: #000;
 }
 
 .link {
   color: var(--primary);
   text-decoration: none;
   font-weight: 500;
+
 }
 
 .link.signup {
@@ -817,17 +820,18 @@ select {
   }
 
   .nav-links li a{
-    color: var(--primary);
+    color: black;
   }
 
   .nav-links.active {
     display: flex;
+     color: white;
   }
 
   .hamburger {
     display: inline-block;
-  }
 
+  }
   .search-bar {
     width: 100%;
     margin: 1rem 0;
@@ -840,7 +844,9 @@ select {
   .welcome-section h2 {
     font-size: 1.75rem;
   }
-
+ .welcome-section .action-links{
+  display: flex;
+ }
   form {
     padding: 1rem;
   }
