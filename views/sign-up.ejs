@@ -35,7 +35,6 @@
       id="first_name" 
       name="first_name" 
       placeholder="Your first name" 
-      value="<%= typeof body !== 'undefined' ? body.first_name : '' %>"
       required 
     />
   </div>
@@ -47,7 +46,6 @@
       id="last_name" 
       name="last_name" 
       placeholder="Your last name" 
-      value="<%= typeof body !== 'undefined' ? body.last_name : '' %>"
       required 
     />
   </div>
@@ -59,7 +57,6 @@
       id="email" 
       name="email" 
       placeholder="Enter your email" 
-      value="<%= typeof body !== 'undefined' ? body.email : '' %>"
       required 
     />
   </div>
@@ -79,8 +76,8 @@
     <label for="confirm_password">Confirm Password:</label>
     <input 
       type="password" 
-      id="confirm_password" 
-      name="confirm_password" 
+      id="confirmPassword" 
+      name="confirmPassword" 
       placeholder="Re-enter your password" 
       required 
     />

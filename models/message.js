@@ -1,4 +1,4 @@
-const pool = require("../models/db");
+const pool = require("./db");
 
 async function createMessage({ title, content, user_id }) {
   const result = await pool.query(
@@ -9,13 +9,19 @@ async function createMessage({ title, content, user_id }) {
 }
 
 async function getAllMessages() {
-  const result = await pool.query(
-    `SELECT messages.*, users.username
-     FROM messages
-     JOIN users ON messages.user_id = users.id
-     ORDER BY created_at`
-  );
-  return result.rows;
+  try {
+    const result = await pool.query(
+      `SELECT messages.*, users.username
+       FROM messages
+       JOIN users ON messages.user_id = users.id
+       ORDER BY created_at DESC`
+    );
+    return result.rows;
+  } catch (err) {
+    console.error('Error fetching messages:', err);
+    throw err;
+  }
 }
+
 
 module.exports = { createMessage, getAllMessages };
