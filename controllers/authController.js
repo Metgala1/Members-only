@@ -177,3 +177,28 @@ exports.message_create_post = [
     }
   }
 ];
+
+exports.showProfile = async (req, res) => {
+  res.render("comingSoon")
+/*
+   if (!req.user) {
+    return res.redirect("/login"); 
+  }
+  res.render("profile", { user: req.user });
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      "SELECT id, username, email, bio, created_at FROM users WHERE id = $1",
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("User not found");
+    }
+
+    res.render("profile", { user: result.rows[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }*/
+};

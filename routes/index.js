@@ -29,6 +29,8 @@ router.post("/message/:id/delete", ensureAuthenticated, messageController.delete
 router.get("/new-message", ensureAuthenticated, authController.message_create_get);
 router.post("/new-message", ensureAuthenticated, authController.message_create_post);
 
+router.get("/profile", ensureAuthenticated, authController.showProfile)
+
 
 
 router.get("/log-out", authController.log_out_get);
