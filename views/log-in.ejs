@@ -1,22 +1,26 @@
-<h2>Welcome Back to The Inner Circle</h2>
-<p>Enter your credentials to access exclusive messages and discussions.</p>
+<h2 class="signin-heading">Welcome Back to The Inner Circle</h2>
+<p class="signin-intro">Enter your credentials to access exclusive messages and discussions.</p>
 
-<form action="/log-in" method="POST" class="form-auth">
-  <label for="username">Username:</label><br />
-  <input type="text" id="username" name="username" placeholder="e.g. john_doe" required /><br />
+<form action="/log-in" method="POST" class="form-auth signin-form">
+  <div class="signin-group">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="e.g. john_doe" required />
+  </div>
 
-  <label for="password">Password:</label><br />
-  <input type="password" id="password" name="password" placeholder="Your secret password" required /><br />
+  <div class="signin-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Your secret password" required />
+  </div>
 
-  <div class="form-options">
+  <div class="signin-options">
     <label>
       <input type="checkbox" name="remember" />
       Remember me
     </label>
-    <a href="#" class="forgot-password">Forgot Password?</a>
+    <a href="#" class="signin-forgot">Forgot Password?</a>
   </div>
 
-  <button type="submit">Log In</button>
+  <button type="submit" class="signin-submit">Log In</button>
 </form>
 
 <% if (messages.error?.length) { %>
@@ -26,9 +30,9 @@
   <div class="flash success"><%= messages.success.join("<br>") %></div>
 <% } %>
 
-<hr />
+<hr class="signin-divider" />
 
-<section class="extras">
+<section class="signin-extras">
   <h3>New to The Inner Circle?</h3>
   <p><a href="/sign-up">Sign up now</a> to join conversations, post messages, and unlock hidden content.</p>
 
@@ -39,3 +43,5 @@
     <li><strong>Password:</strong> demoPass123</li>
   </ul>
 </section>
+
+
