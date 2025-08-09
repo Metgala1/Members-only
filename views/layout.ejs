@@ -28,7 +28,7 @@
         <ul class="nav-links">
           <% if (currentUser) { %>
             <li>Welcome, <%= currentUser.username %></li>
-            <li><a class="profile" href="/profile"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a class="profile" href="/"><i class="fas fa-user"></i>Profile</a></li>
             <li><a class="log-out" href="/log-out"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
           <% } else { %>
             <li class="log-in"><a href="/log-in"> <i class="fas fa-sign-in-alt"></i> Log in</a></li>
